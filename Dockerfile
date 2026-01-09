@@ -15,16 +15,11 @@ RUN apt-get update && \
     curl unzip xz-utils libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
     libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libxshmfence1 libgbm1 \
     libpango-1.0-0 libpangocairo-1.0-0 libgtk-3-0 xvfb \
+    portaudio19-dev libasound2-dev \
+    chromium-browser chromium-chromedriver \
+    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome \
+    && ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver \
     && rm -rf /var/lib/apt/lists/*
-
-# Install Chrome
-RUN wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt-get update && apt-get install -y /tmp/chrome.deb && rm /tmp/chrome.deb
-
-# Install ChromeDriver via apt
-RUN apt-get update && \
-    apt-get install -y chromium-chromedriver && \
-    ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
 
 # Set working directory
 WORKDIR /app
