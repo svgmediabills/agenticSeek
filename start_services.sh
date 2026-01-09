@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+# source .env
 
 command_exists() {
     command -v "$1" &> /dev/null
