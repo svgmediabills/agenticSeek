@@ -21,11 +21,10 @@ RUN apt-get update && \
 RUN wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt-get update && apt-get install -y /tmp/chrome.deb && rm /tmp/chrome.deb
 
-# Install ChromeDriver
-RUN CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f1) && \
-    wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROME_VERSION}.0.0/chromedriver_linux64.zip && \
-    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && rm /tmp/chromedriver.zip && \
-    chmod +x /usr/local/bin/chromedriver
+# Install ChromeDriver via apt
+RUN apt-get update && \
+    apt-get install -y chromium-chromedriver && \
+    ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
 
 # Set working directory
 WORKDIR /app
