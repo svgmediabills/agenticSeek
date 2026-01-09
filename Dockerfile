@@ -20,6 +20,9 @@ RUN apt-get update && \
     && ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver \
     && rm -rf /var/lib/apt/lists/*
 
+# Remove old Node / dev packages to avoid conflicts
+RUN apt-get remove -y nodejs libnode-dev && apt-get autoremove -y
+
 # Install Node 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
