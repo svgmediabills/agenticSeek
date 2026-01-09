@@ -31,8 +31,10 @@ RUN pip3 install --upgrade pip
 RUN pip3 install $(grep -v 'pyaudio' requirements.txt)
 
 # Install frontend dependencies
-WORKDIR /app/frontend
+WORKDIR /app/frontend/agentic-seek-front
 RUN npm install --legacy-peer-deps
+# Optional: build static files
+RUN npm run build
 WORKDIR /app
 
 # Make the start script executable
